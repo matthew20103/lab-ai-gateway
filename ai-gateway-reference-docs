@@ -1,0 +1,4 @@
+Refer to the Configuration Reference for all available configuration options. Link: https://github.com/Portkey-AI/airs-gw-helm
+Refer to the Deployment guide for end-to-end deployment steps. Link: https://github.com/Portkey-AI/airs-gw-helm/blob/main/charts/airs-gw/docs/Configuration.md
+AI Gateway Helm chart spawns a built-in Redis instance. For production deployments, it is recommended to connect to an external managed Redis service. This document covers all supported external Redis providers and their authentication methods across AWS, Azure, and GCP. Link: https://github.com/Portkey-AI/airs-gw-helm/blob/main/charts/airs-gw/README.md
+Official doc: https://docs.paloaltonetworks.com/ai-runtime-security/administration/configure-ai-gateway

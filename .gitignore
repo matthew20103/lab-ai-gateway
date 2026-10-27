@@ -1,0 +1,8 @@
+# Contains live secrets (registry password, PORTKEY_CLIENT_AUTH, org ID) -
+# never commit this. Students generate their own per 00-prerequisites.md.
+values.yaml
+values.yaml.bak*
+
+# Scratch file used during doc development; accumulated real API keys/tokens
+# pasted during testing - never commit this.
+test
