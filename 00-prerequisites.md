@@ -54,7 +54,9 @@ service:
 | [05-adding-trusted-custom-hosts.md](05-adding-trusted-custom-hosts.md) | Advanced / optional | Doc 03 (doc 04 helpful but not required) |
 | [06-known-limitations.md](06-known-limitations.md) | Advanced / optional | **Doc 07 first**, not doc 04/05 |
 | [07-force-upgrading-gateway-image.md](07-force-upgrading-gateway-image.md) | Advanced / optional | Doc 03 |
+| [09-network-channel-client-deployment.md](09-network-channel-client-deployment.md) | Advanced / optional | Doc 03 |
+| [10-ai-model-security-scanning-deployment.md](10-ai-model-security-scanning-deployment.md) | Advanced / optional | Doc 03 |
 
-Complete 01→02→03 in order — that's the whole required lab: a working 2-pod gateway behind a load balancer, serving real LLM traffic. Docs 04-07 are independent deep dives you can do in any order, except doc 06 (TypeSafe/decisions, A2A agent routing), which needs the chart force-upgrade from doc 07 first. MCP (docs 02 §2.9, 04, 05) does **not** need that upgrade.
+Complete 01→02→03 in order — that's the whole required lab: a working 2-pod gateway behind a load balancer, serving real LLM traffic. Docs 04-07, 09, and 10 are independent deep dives you can do in any order, except doc 06 (TypeSafe/decisions, A2A agent routing), which needs the chart force-upgrade from doc 07 first. MCP (docs 02 §2.9, 04, 05) does **not** need that upgrade.
 
 Examples in the advanced docs originally came from one real deployment and use placeholder hostnames/IPs (e.g. `mcphub.yourdomain.lab`, `<gateway-lan-ip>`) — substitute your own throughout.

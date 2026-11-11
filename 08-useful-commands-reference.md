@@ -180,3 +180,27 @@ kubectl rollout status deployment/airs-gw -n airs-gw
 | Date | From → To | Result |
 |---|---|---|
 | 2026-11-04 | `2.25.1` → `2.32.0` | pending — `values.yaml` updated, not yet applied to cluster |
+
+## 8.5 Changing HAProxy's `timeout client` / `timeout server`
+
+These live purely at the HAProxy layer in front of the gateway ([doc 02 §2.6](02-ai-gateway-deployment.md#26-installing-and-configuring-haproxy)), not in `values.yaml` — no Helm upgrade needed. `timeout server` is what governs how long HAProxy waits for a response (including a slow LLM call) before giving up and serving the `504.http` error page; `timeout client` should generally match or exceed it, or HAProxy may drop the client side first.
+
+**1. Edit the `defaults` block in `/etc/haproxy/haproxy.cfg`:**
+```bash
+sudo nano /etc/haproxy/haproxy.cfg
+```
+```haproxy
+        timeout connect 5000
+        timeout client  90s
+        timeout server  90s
+```
+Values are milliseconds by default, but `s`/`m` suffixes (e.g. `90s`, `2m`) are accepted and more readable.
+
+**2. Validate syntax, then reload:**
+```bash
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+sudo systemctl reload haproxy   # graceful, no dropped connections
+sudo systemctl status haproxy --no-pager
+```
+
+**Before picking a value:** check how long your slowest real LLM calls through this gateway actually take (long completions, bigger models) — if any provider can legitimately run past the current timeout, raise it past that, or you'll get spurious 504s on valid-but-slow requests.
